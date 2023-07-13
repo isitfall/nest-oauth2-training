@@ -35,4 +35,21 @@ export class AuthService {
 
         return tokensResponse;
     }
+
+    async getGithubTokens(code: string) {
+        const tokensRequest = await fetch('https://github.com/login/oauth/access_token\n', {
+            method: 'POST',
+            body: encodeToUrlEncoded({
+                code,
+                client_id: process.env.GITHUB_APP_CLIENT_ID,
+                client_secret: process.env.GIRHUB_APP_SECRET,
+                redirect_uri: process.env.GITHUB_APP_REDIRECT_URI,
+            }),
+            headers: {'Content-type': 'application/x-www-form-urlencoded', Accept: 'application/json'}
+        });
+
+        const tokensResponse = await tokensRequest.json();
+
+        return tokensResponse;
+    }
 }

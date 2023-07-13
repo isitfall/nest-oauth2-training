@@ -15,4 +15,9 @@ export class AuthController {
     authYandex(@Query('code') code: string) {
         return this.authService.getYandexTokens(code);
     }
+
+    @Get("/github")
+    authGithub(@Query('code') code: string) {
+        return this.authService.getGithubTokens(code);
+    }
 }
